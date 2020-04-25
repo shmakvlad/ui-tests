@@ -22,7 +22,7 @@ public class FindElement {
         $("#email").setValue("dima@gmail.com");
         $("#password").setValue("vlad12-8");
 
-        $(By.name("email")).setValue("roma@gmail.com");
+        $(byClassName("form-group")).find(By.name("email")).setValue("roma@gmail.com");
         $(byName("email")).setValue("george@gmail.com");
 
         $(By.className("btn-success")).click();
@@ -69,9 +69,6 @@ public class FindElement {
             driver.findElement(By.name("password")).sendKeys("vlad12-8");
             driver.findElement(By.className("btn-success")).click();
 
-        } catch (Exception e) {
-            System.out.print("Web element not found");
-            e.printStackTrace();
         } finally {
             driver.quit();
         }
