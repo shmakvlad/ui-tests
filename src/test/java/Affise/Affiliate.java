@@ -4,6 +4,7 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.junit5.ScreenShooterExtension;
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
@@ -24,12 +25,8 @@ public class Affiliate {
         Configuration.baseUrl = "http://offers.staging.affise.com";
     }
 
-
-
     @Test
     public void createAffiliate() {
-        login();
-
         open("/partners/new");
         $("#EditPartner_email").setValue(generate.internet().emailAddress());
         $("#EditPartner_password").setValue(generate.internet().password(6,12));
@@ -41,8 +38,7 @@ public class Affiliate {
         $("#EditPartner_submit").shouldHave(text("Save"));
     }
 
-
-
+    @BeforeEach
     public void login(){
         open("/user/login");
         $("#email").setValue("ivan@gmail.com");
