@@ -20,6 +20,7 @@ public class FindElement {
         $(By.id("email")).setValue("ivan@gmail.com");
         $(byId("email")).setValue("vlad@gmail.com");
         $("#email").setValue("dima@gmail.com");
+        $("input[required='required'][type='email']").setValue("vova@gmail.com");
         $("#password").setValue("vlad12-8");
 
         $(byClassName("form-group")).find(By.name("email")).setValue("roma@gmail.com");
@@ -57,9 +58,10 @@ public class FindElement {
 
         try {
             driver = new ChromeDriver();
-            driver.get("http://offers.staging.affise.com");
-
             driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+            driver.manage().window().maximize();
+
+            driver.get("http://offers.staging.affise.com");
 
             driver.findElement(By.className("form-group"))
                   .findElement(By.cssSelector("input#email.form-control")).sendKeys("ivan@gmail.com");
