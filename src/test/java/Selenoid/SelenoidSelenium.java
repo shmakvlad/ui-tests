@@ -1,9 +1,8 @@
 package Selenoid;
 
-import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -13,7 +12,8 @@ import java.util.concurrent.TimeUnit;
 
 import static com.codeborne.selenide.Selectors.*;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+//@Execution(ExecutionMode.CONCURRENT)  // Run in multiple thread
+//@Execution(ExecutionMode.SAME_THREAD) // Run in one thread
 public class SelenoidSelenium {
 
     private RemoteWebDriver driver;
@@ -34,7 +34,7 @@ public class SelenoidSelenium {
     }
 
     @Test
-    public void login(){
+    public void login1(){
         driver.get("http://offers.staging.affise.com");
         driver.findElement(byId("email")).sendKeys("ivan@gmail.com");
         driver.findElement(byId("password")).sendKeys("vlad12-8");
@@ -42,7 +42,25 @@ public class SelenoidSelenium {
         driver.findElement(byClassName("btn-success")).click();
     }
 
-    @AfterAll
+    @Test
+    public void login2(){
+        driver.get("http://offers.staging.affise.com");
+        driver.findElement(byId("email")).sendKeys("ivan@gmail.com");
+        driver.findElement(byId("password")).sendKeys("vlad12-8");
+        driver.findElement(byXpath("//input[@id='sign']")).click();
+        driver.findElement(byClassName("btn-success")).click();
+    }
+
+    @Test
+    public void login3(){
+        driver.get("http://offers.staging.affise.com");
+        driver.findElement(byId("email")).sendKeys("ivan@gmail.com");
+        driver.findElement(byId("password")).sendKeys("vlad12-8");
+        driver.findElement(byXpath("//input[@id='sign']")).click();
+        driver.findElement(byClassName("btn-success")).click();
+    }
+
+    @AfterEach
     public void closeDriver(){
         if (driver != null){
             driver.quit();
