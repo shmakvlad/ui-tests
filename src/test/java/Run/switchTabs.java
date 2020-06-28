@@ -35,7 +35,7 @@ public class switchTabs {
         String script = "window.open('"+ "http://offers.staging.affise.com/stats/custom" +"','_blank');";
         executeJavaScript(script);
         switchTo().window(1); switchTo().window(0); switchTo().window(1);
-        sleep(5000);
+        sleep(2000);
     }
 
     @Test
