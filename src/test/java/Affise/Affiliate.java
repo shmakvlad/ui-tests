@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
 import static org.openqa.selenium.remote.BrowserType.CHROME;
 
@@ -26,7 +27,7 @@ public class Affiliate {
     }
 
     @Test
-    public void createAffiliate() {
+    public void createAffiliate1() {
         open("/partners/new");
         $("#EditPartner_email").setValue(generate.internet().emailAddress());
         $("#EditPartner_password").setValue(generate.internet().password(6,12));
@@ -36,6 +37,21 @@ public class Affiliate {
         $("#EditPartner_status").selectOptionByValue("1");
         $("#EditPartner_submit").click();
         $("#EditPartner_submit").shouldHave(text("Save"));
+        closeWebDriver();
+    }
+
+    @Test
+    public void createAffiliate2() {
+        open("/partners/new");
+        $("#EditPartner_email").setValue(generate.internet().emailAddress());
+        $("#EditPartner_password").setValue(generate.internet().password(6,12));
+        $("#EditPartner_manager_id").selectOption(3);
+        $("#EditPartner_country").selectOptionByValue("RU");
+        $("#EditPartner_custom_fields_1").setValue(String.valueOf(generate.funnyName()));
+        $("#EditPartner_status").selectOptionByValue("1");
+        $("#EditPartner_submit").click();
+        $("#EditPartner_submit").shouldHave(text("Save"));
+        closeWindow();
     }
 
     @BeforeEach
@@ -43,6 +59,7 @@ public class Affiliate {
         open("/user/login");
         $("#email").setValue("ivan@gmail.com");
         $("#password").setValue("vlad12-8");
+        $(byXpath("//input[@id='sign']")).click();
         $("button.btn.btn-success.btn-block").click();
         screenshot("login");
     }
