@@ -22,6 +22,11 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.3.1</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>2.7</version>
@@ -62,14 +67,22 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
                 <configuration>
-                    <excludes>
-                        <exclude/>
-                    </excludes>
+                    <parallel>all</parallel>
+                    <threadCount>20</threadCount>
+<!--                    <useUnlimitedThreads>true</useUnlimitedThreads>-->
+<!--                    <threadCountSuites>2</threadCountSuites>-->
+<!--                    <threadCountClasses>2</threadCountClasses>-->
+<!--                    <threadCountMethods>2</threadCountMethods>-->
+                    <includes>
+                        <include>SelenoidSelenide.class</include>
+                        <include>SelenoidSelenium.class</include>
+                    </includes>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
                 <configuration>
                     <source>7</source>
                     <target>7</target>

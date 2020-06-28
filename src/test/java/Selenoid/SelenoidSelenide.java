@@ -6,6 +6,8 @@ import com.codeborne.selenide.junit5.ScreenShooterExtension;
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.RegisterExtension;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -18,6 +20,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
 
+@Execution(ExecutionMode.CONCURRENT)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class SelenoidSelenide {
 
@@ -28,24 +31,24 @@ public class SelenoidSelenide {
     static ScreenShooterExtension sh = new ScreenShooterExtension(false);
 
     // 1 Before all | Different browsers type
-    @BeforeAll
     public void setUp() throws MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setBrowserName("chrome");
         capabilities.setVersion("83.0");
         capabilities.setCapability("enableVNC", true);
 
-        Configuration.baseUrl = "http://offers.staging.affise.com";
         driver = new RemoteWebDriver(
                 URI.create("http://localhost:4444/wd/hub").toURL(),
                 capabilities
         );
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         driver.manage().window().maximize();
+        Configuration.baseUrl = "http://offers.staging.affise.com";
         WebDriverRunner.setWebDriver(driver);
     }
 
     // 2 Before all
+    @BeforeAll
     public void beforeAll() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability( "enableVNC",  true);
@@ -63,8 +66,22 @@ public class SelenoidSelenide {
         Configuration.browserSize = "1920x1080"; // Default size: 1366x768
     }
 
-    @Test
-    public void createAffiliate() {
+    @Test()
+    public void createAffiliate1() {
+        open("/partners/new");
+        $("#EditPartner_email").setValue(generate.internet().emailAddress());
+        $("#EditPartner_password").setValue(generate.internet().password(6,12));
+        $("#EditPartner_manager_id").selectOption(3);
+        $("#EditPartner_country").selectOptionByValue("RU");
+        $("#EditPartner_custom_fields_1").setValue(String.valueOf(generate.funnyName()));
+        $("#EditPartner_status").selectOptionByValue("1");
+        $("#EditPartner_submit").click();
+        $("#EditPartner_submit").shouldHave(text("Save"));
+        screenshot("Create Affiliate");
+    }
+
+    @Test()
+    public void createAffiliate2() {
         open("/partners/new");
         $("#EditPartner_email").setValue(generate.internet().emailAddress());
         $("#EditPartner_password").setValue(generate.internet().password(6,12));

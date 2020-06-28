@@ -1,7 +1,7 @@
 package Selenoid;
 
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -18,7 +18,7 @@ public class SelenoidSelenium {
 
     private RemoteWebDriver driver;
 
-    @BeforeAll
+    @BeforeEach
     public void setUpConfiguration() throws MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setBrowserName("chrome");
@@ -34,14 +34,12 @@ public class SelenoidSelenium {
     }
 
     @Test
-    public void login() throws Exception {
-        Thread.sleep(4000);
+    public void login(){
         driver.get("http://offers.staging.affise.com");
         driver.findElement(byId("email")).sendKeys("ivan@gmail.com");
         driver.findElement(byId("password")).sendKeys("vlad12-8");
         driver.findElement(byXpath("//input[@id='sign']")).click();
         driver.findElement(byClassName("btn-success")).click();
-        Thread.sleep(6000);
     }
 
     @AfterAll
