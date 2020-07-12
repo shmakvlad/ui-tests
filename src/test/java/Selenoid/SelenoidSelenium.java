@@ -14,7 +14,7 @@ import static com.codeborne.selenide.Selectors.*;
 
 //@Execution(ExecutionMode.CONCURRENT)  // Run in multiple thread
 //@Execution(ExecutionMode.SAME_THREAD) // Run in one thread
-public class SelenoidSelenium {
+public class SelenoidSelenium { // Clean Selenium
 
     private RemoteWebDriver driver;
 

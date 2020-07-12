@@ -23,7 +23,7 @@ import static com.codeborne.selenide.Selenide.*;
 
 //@Execution(ExecutionMode.SAME_THREAD)   // Run in one thread
 //@Execution(ExecutionMode.CONCURRENT)    // Run in multiple thread
-public class SelenoidSelenide {
+public class Selenoid {
 
     private RemoteWebDriver driver;
     private Faker generate = new Faker();
@@ -31,26 +31,9 @@ public class SelenoidSelenide {
     @RegisterExtension
     static ScreenShooterExtension sh = new ScreenShooterExtension(false);
 
-    // 1 Before all | Different browsers type
-    public void setUp() throws MalformedURLException {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setBrowserName("chrome");
-        capabilities.setVersion("83.0");
-        capabilities.setCapability("enableVNC", true);
-
-        driver = new RemoteWebDriver(
-                URI.create("http://localhost:4444/wd/hub").toURL(),
-                capabilities
-        );
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        Configuration.baseUrl = "http://offers.staging.affise.com";
-        WebDriverRunner.setWebDriver(driver);
-    }
-
-    // 2 Before all
+    // 1 Version | Before all | The most stable option
     @BeforeAll
-    public static void beforeAll() {
+    public static void beforeAll1() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability( "enableVNC",  true);
         capabilities.setCapability("enableVideo", false);
@@ -66,6 +49,23 @@ public class SelenoidSelenide {
         Configuration.browser = CHROME;
         Configuration.baseUrl = "http://offers.staging.affise.com";
         Configuration.browserSize = "1920x1080"; // Default size: 1366x768
+    }
+
+    // 2 Version | Before all | Different browsers type
+    public void beforeAll2() throws MalformedURLException {
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setBrowserName("chrome");
+        capabilities.setVersion("83.0");
+        capabilities.setCapability("enableVNC", true);
+
+        driver = new RemoteWebDriver(
+                URI.create("http://localhost:4444/wd/hub").toURL(),
+                capabilities
+        );
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
+        Configuration.baseUrl = "http://offers.staging.affise.com";
+        WebDriverRunner.setWebDriver(driver);
     }
 
     @Test()

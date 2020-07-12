@@ -11,6 +11,7 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
+import static io.qameta.allure.Allure.step;
 import static org.openqa.selenium.remote.BrowserType.CHROME;
 
 public class Affiliate {
@@ -28,30 +29,36 @@ public class Affiliate {
 
     @Test
     public void createAffiliate1() {
-        open("/partners/new");
-        $("#EditPartner_email").setValue(generate.internet().emailAddress());
-        $("#EditPartner_password").setValue(generate.internet().password(6,12));
-        $("#EditPartner_manager_id").selectOption(3);
-        $("#EditPartner_country").selectOptionByValue("RU");
-        $("#EditPartner_custom_fields_1").setValue(String.valueOf(generate.funnyName()));
-        $("#EditPartner_status").selectOptionByValue("1");
-        $("#EditPartner_submit").click();
-        $("#EditPartner_submit").shouldHave(text("Save"));
-        closeWebDriver();
+        step("Открыть страницу создания партнера", () -> { open("/partners/new"); });
+        step("Заполнить поле email", () -> { $("#EditPartner_email").setValue(generate.internet().emailAddress()); });
+        step("Заполнить поле пароль", () -> { $("#EditPartner_password").setValue(generate.internet().password(6,12)); });
+        step("В поле менеджер для партнера выбрать любого пользователя", () -> { $("#EditPartner_manager_id").selectOption(3); });
+        step("В поле страна выбрать Россию", () -> { $("#EditPartner_country").selectOptionByValue("RU"); });
+        step("Заполнить поле Skype", () -> { $("#EditPartner_custom_fields_1").setValue(String.valueOf(generate.funnyName())); });
+        step("В поле статус установить значение Active", () -> { $("#EditPartner_status").selectOptionByValue("1"); });
+        step("Нажать на кнопку Add", () -> { $("#EditPartner_submit").click(); });
+        step("Проверка | Текст на кнопке Add изменился и эквивалентен значению Save", () -> { $("#EditPartner_submit").shouldHave(text("Save")); });
+        step("Закрыть браузер", () -> { closeWebDriver(); });
     }
 
     @Test
     public void createAffiliate2() {
-        open("/partners/new");
-        $("#EditPartner_email").setValue(generate.internet().emailAddress());
-        $("#EditPartner_password").setValue(generate.internet().password(6,12));
-        $("#EditPartner_manager_id").selectOption(3);
-        $("#EditPartner_country").selectOptionByValue("RU");
-        $("#EditPartner_custom_fields_1").setValue(String.valueOf(generate.funnyName()));
-        $("#EditPartner_status").selectOptionByValue("1");
-        $("#EditPartner_submit").click();
-        $("#EditPartner_submit").shouldHave(text("Save"));
-        closeWindow();
+        step("Открыть страницу создания партнера", () -> {
+            open("/partners/new");
+        });
+        step("Заполнить поля корректными данными", () -> {
+            $("#EditPartner_email").setValue(generate.internet().emailAddress());
+            $("#EditPartner_password").setValue(generate.internet().password(6,12));
+            $("#EditPartner_manager_id").selectOption(3);
+            $("#EditPartner_country").selectOptionByValue("RU");
+            $("#EditPartner_custom_fields_1").setValue(String.valueOf(generate.funnyName()));
+            $("#EditPartner_status").selectOptionByValue("1");
+            $("#EditPartner_submit").click();
+            $("#EditPartner_submit").shouldHave(text("Save"));
+        });
+        step("Закрыть вкладку", () -> {
+            closeWebDriver();
+        });
     }
 
     @BeforeEach
