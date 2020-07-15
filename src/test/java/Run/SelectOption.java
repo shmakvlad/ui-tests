@@ -53,6 +53,8 @@ public class SelectOption {
 
         SelenideElement selenideElement = $(byXpath("//div//span[text()='Country']/.."));
         selenideElement.click();
+//        selenideElement.selectRadio("country");
+//        selenideElement.selectRadio("country").click();
 
         ElementsCollection filters = $$("span.juk8CVoJ5WisqFm2gO5ve");
         filters.find(text("Belarus")).click();
