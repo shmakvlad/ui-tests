@@ -36,7 +36,7 @@ public class Selenoid {
     @BeforeAll
     public static void beforeAll1() {
         Configuration.browser = "Selenoid.Provider.SelenoidWebDriverProvider";
-        Configuration.baseUrl = "http://offers.staging.affise.com";
+        Configuration.baseUrl = "http://offers.staging.affise.com.com";
     }
 
     // 2 Version | Before all | More stable option
