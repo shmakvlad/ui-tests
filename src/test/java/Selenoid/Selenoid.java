@@ -21,7 +21,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
 
-//@Execution(ExecutionMode.SAME_THREAD)   // Run in one thread
+//@Execution(ExecutionMode.SAME_THREAD)   //         Run in one thread
 //@Execution(ExecutionMode.CONCURRENT)    // Run in multiple thread
 public class Selenoid {
 
@@ -31,9 +31,16 @@ public class Selenoid {
     @RegisterExtension
     static ScreenShooterExtension sh = new ScreenShooterExtension(false);
 
-    // 1 Version | Before all | The most stable option
+
+    // 1 Version | Before all | Option with SelenoidWebDriverProvider, the most stable option
     @BeforeAll
     public static void beforeAll1() {
+        Configuration.browser = "Selenoid.Provider.SelenoidWebDriverProvider";
+        Configuration.baseUrl = "http://offers.staging.affise.com";
+    }
+
+    // 2 Version | Before all | More stable option
+    public static void beforeAll2() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability( "enableVNC",  true);
         capabilities.setCapability("enableVideo", false);
@@ -51,8 +58,8 @@ public class Selenoid {
         Configuration.browserSize = "1920x1080"; // Default size: 1366x768
     }
 
-    // 2 Version | Before all | Different browsers type
-    public void beforeAll2() throws MalformedURLException {
+    // 3 Version | Before all | Different browsers type
+    public void beforeAll3() throws MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setBrowserName("chrome");
         capabilities.setVersion("83.0");
@@ -155,8 +162,8 @@ public class Selenoid {
     @BeforeEach
     public void login(){
         open("/user/login");
-        $("#email").setValue("ivan@gmail.com");
-        $("#password").setValue("vlad12-8");
+        $("#email").setValue("root@user.admin");
+        $("#password").setValue("-&z%5CZc7=V^U7AN");
         $(byXpath("//input[@id='sign']")).click();
         $("button.btn.btn-success.btn-block").click();
     }

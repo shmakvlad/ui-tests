@@ -20,7 +20,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.openqa.selenium.remote.BrowserType.CHROME;
 
-public class switchTabs {
+public class switchTabWindow {
 
     private final Faker generate = new Faker();
 
@@ -84,21 +84,20 @@ public class switchTabs {
     }
 
     @Test
-    public void createAffiliateSelenium(){
+    public void switchTabs(){
     // Selenium
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.manage().window().maximize();
     // Login
         driver.get(Configuration.baseUrl);
-        sleep(3000);
         driver.findElement(byId("email")).sendKeys("ivan@gmail.com");
         driver.findElement(byId("password")).sendKeys("vlad12-8");
         driver.findElement(byXpath("//input[@id='sign']")).click();
         driver.findElement(byClassName("btn-success")).click();
     // New tab
-        String selectLinkOpeninNewTab = Keys.chord(Keys.COMMAND, Keys.ENTER);
-        driver.findElement(By.xpath("//a[contains(text(),'Statistics')]")).sendKeys(selectLinkOpeninNewTab);
+        String selectLinkOpenInNewTab = Keys.chord(Keys.COMMAND, Keys.ENTER);
+        driver.findElement(By.xpath("//a[contains(text(),'Statistics')]")).sendKeys(selectLinkOpenInNewTab);
         driver.findElement(By.xpath("//a[contains(text(),'Statistics')]")).sendKeys(Keys.COMMAND, Keys.ENTER);
 
     // New empty tab | Not working, bug in Selenium
@@ -115,6 +114,42 @@ public class switchTabs {
         driver.close();
         driver.switchTo().window(tabs.get(0));
         driver.get("https://www.news.google.com");
+        driver.quit();
+    }
+
+    @Test
+    public void switchWindows(){
+    // Selenium
+        WebDriver driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
+    // Login
+        driver.get(Configuration.baseUrl);
+        driver.findElement(byId("email")).sendKeys("ivan@gmail.com");
+        driver.findElement(byId("password")).sendKeys("vlad12-8");
+        driver.findElement(byXpath("//input[@id='sign']")).click();
+        driver.findElement(byClassName("btn-success")).click();
+
+    // Remember current window
+        String mainPage = driver.getWindowHandle();
+
+    // New window
+        driver.findElement(By.xpath("//a[contains(text(),'Statistics')]")).sendKeys(Keys.SHIFT, Keys.ENTER);
+
+    // New empty window | Not working, bug in Selenium
+        driver.findElement(By.cssSelector("body")).sendKeys(Keys.COMMAND + "N");
+        driver.findElement(By.cssSelector("body")).sendKeys(Keys.COMMAND, "n");
+
+    // Switch to the last window
+        for (String windowHandle : driver.getWindowHandles()){
+            driver.switchTo().window(windowHandle);
+        }
+
+    // Switch Windows
+        driver.findElement(By.xpath("//span[contains(text(),'trafficback')]"));
+        driver.close();
+        driver.switchTo().window(mainPage);
+        driver.findElement(By.xpath("//span[contains(text(),'Create')]"));
         driver.quit();
     }
 
