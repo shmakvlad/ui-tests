@@ -11,14 +11,14 @@ import java.net.URI;
 
 public class SelenoidWebDriverProvider implements WebDriverProvider {
 
-    private String ip = "164.90.183.229";
-//    private String ip = "localhost";
+//    private String ip = "164.90.183.229";
+    private String ip = "localhost";
 
     @Override
     public WebDriver createDriver(DesiredCapabilities capabilities) {
         DesiredCapabilities browser = new DesiredCapabilities();
         browser.setBrowserName("chrome");
-        browser.setVersion("81.0");
+        browser.setVersion("83.0");
         browser.setCapability("enableVNC", true);
         browser.setCapability("enableVideo", false);
 

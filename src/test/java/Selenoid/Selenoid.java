@@ -20,8 +20,9 @@ import static com.codeborne.selenide.Browsers.CHROME;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
+import static io.qameta.allure.Allure.step;
 
-//@Execution(ExecutionMode.SAME_THREAD)   //         Run in one thread
+//@Execution(ExecutionMode.SAME_THREAD)   // Run in one thread
 //@Execution(ExecutionMode.CONCURRENT)    // Run in multiple thread
 public class Selenoid {
 
@@ -35,8 +36,10 @@ public class Selenoid {
     // 1 Version | Before all | Option with SelenoidWebDriverProvider, the most stable option
     @BeforeAll
     public static void beforeAll1() {
-        Configuration.browser = "Selenoid.Provider.SelenoidWebDriverProvider";
-        Configuration.baseUrl = "http://offers.staging.affise.com";
+        step("Setting browser driver", () -> {
+            Configuration.browser = "Selenoid.Provider.SelenoidWebDriverProvider";
+            Configuration.baseUrl = "http://offers.staging.affise.com";
+        });
     }
 
     // 2 Version | Before all | More stable option
@@ -77,100 +80,176 @@ public class Selenoid {
 
     @Test()
     public void createAffiliate1() {
-        open("/partners/new");
-        $("#EditPartner_email").setValue(generate.internet().emailAddress());
-        $("#EditPartner_password").setValue(generate.internet().password(6,12));
-        $("#EditPartner_manager_id").selectOption(3);
-        $("#EditPartner_country").selectOptionByValue("RU");
-        $("#EditPartner_custom_fields_1").setValue(String.valueOf(generate.funnyName()));
-        $("#EditPartner_status").selectOptionByValue("1");
-        $("#EditPartner_submit").click();
-        $("#EditPartner_submit").shouldHave(text("Save"));
-        screenshot("Create Affiliate");
+        step("Open partner creation page", () -> {
+            open("/partners/new");
+        });
+        step("Fill fields with correct data", () -> {
+            $("#EditPartner_email").setValue(generate.internet().emailAddress());
+            $("#EditPartner_password").setValue(generate.internet().password(6,12));
+            $("#EditPartner_manager_id").selectOption(3);
+            $("#EditPartner_country").selectOptionByValue("RU");
+            $("#EditPartner_custom_fields_1").setValue(String.valueOf(generate.funnyName()));
+            $("#EditPartner_status").selectOptionByValue("1");
+        });
+        step("Click on button Add", () -> {
+            $("#EditPartner_submit").click();
+        });
+        step(" <--- Validation ---> " +
+                "1. Partner successfully created. " +
+                "2. Partner edit page is open.", () -> {
+            $("#EditPartner_submit").shouldHave(text("Save"));
+        });
+        step("Screenshot", () -> {
+            screenshot("Create Affiliate");
+        });
     }
 
     @Test()
     public void createAffiliate2() {
-        open("/partners/new");
-        $("#EditPartner_email").setValue(generate.internet().emailAddress());
-        $("#EditPartner_password").setValue(generate.internet().password(6,12));
-        $("#EditPartner_manager_id").selectOption(3);
-        $("#EditPartner_country").selectOptionByValue("RU");
-        $("#EditPartner_custom_fields_1").setValue(String.valueOf(generate.funnyName()));
-        $("#EditPartner_status").selectOptionByValue("1");
-        $("#EditPartner_submit").click();
-        $("#EditPartner_submit").shouldHave(text("Save"));
-        screenshot("Create Affiliate");
+        step("Открыть страницу создания партнера", () -> {
+            open("/partners/new");
+        });
+        step("Заполнить поля корректными данными", () -> {
+            $("#EditPartner_email").setValue(generate.internet().emailAddress());
+            $("#EditPartner_password").setValue(generate.internet().password(6,12));
+            $("#EditPartner_manager_id").selectOption(3);
+            $("#EditPartner_country").selectOptionByValue("RU");
+            $("#EditPartner_custom_fields_1").setValue(String.valueOf(generate.funnyName()));
+            $("#EditPartner_status").selectOptionByValue("1");
+        });
+        step("Кликнуть по кнопке Add", () -> {
+            $("#EditPartner_submit").click();
+        });
+        step(" <--- Validation ---> " +
+                "1. Партнер успешно создан. " +
+                "2. Открыта станица редактирования партнера.", () -> {
+            $("#EditPartner_submit").shouldHave(text("Save"));
+        });
+        step("Screenshot", () -> {
+            screenshot("Create Affiliate");
+        });
     }
 
     @Test()
     public void createAffiliate3() {
-        open("/partners/new");
-        $("#EditPartner_email").setValue(generate.internet().emailAddress());
-        $("#EditPartner_password").setValue(generate.internet().password(6,12));
-        $("#EditPartner_manager_id").selectOption(3);
-        $("#EditPartner_country").selectOptionByValue("RU");
-        $("#EditPartner_custom_fields_1").setValue(String.valueOf(generate.funnyName()));
-        $("#EditPartner_status").selectOptionByValue("1");
-        $("#EditPartner_submit").click();
-        $("#EditPartner_submit").shouldHave(text("Save"));
-        screenshot("Create Affiliate");
+        step("Открыть страницу создания партнера", () -> {
+            open("/partners/new");
+        });
+        step("Заполнить поля корректными данными", () -> {
+            $("#EditPartner_email").setValue(generate.internet().emailAddress());
+            $("#EditPartner_password").setValue(generate.internet().password(6,12));
+            $("#EditPartner_manager_id").selectOption(3);
+            $("#EditPartner_country").selectOptionByValue("RU");
+            $("#EditPartner_custom_fields_1").setValue(String.valueOf(generate.funnyName()));
+            $("#EditPartner_status").selectOptionByValue("1");
+        });
+        step("Кликнуть по кнопке Add", () -> {
+            $("#EditPartner_submit").click();
+        });
+        step(" <--- Validation ---> " +
+                "1. Партнер успешно создан. " +
+                "2. Открыта станица редактирования партнера.", () -> {
+            $("#EditPartner_submit").shouldHave(text("Save"));
+        });
+        step("Screenshot", () -> {
+            screenshot("Create Affiliate");
+        });
     }
 
     @Test()
     public void createAffiliate4() {
-        open("/partners/new");
-        $("#EditPartner_email").setValue(generate.internet().emailAddress());
-        $("#EditPartner_password").setValue(generate.internet().password(6,12));
-        $("#EditPartner_manager_id").selectOption(3);
-        $("#EditPartner_country").selectOptionByValue("RU");
-        $("#EditPartner_custom_fields_1").setValue(String.valueOf(generate.funnyName()));
-        $("#EditPartner_status").selectOptionByValue("1");
-        $("#EditPartner_submit").click();
-        $("#EditPartner_submit").shouldHave(text("Save"));
-        screenshot("Create Affiliate");
+        step("Открыть страницу создания партнера", () -> {
+            open("/partners/new");
+        });
+        step("Заполнить поля корректными данными", () -> {
+            $("#EditPartner_email").setValue(generate.internet().emailAddress());
+            $("#EditPartner_password").setValue(generate.internet().password(6,12));
+            $("#EditPartner_manager_id").selectOption(3);
+            $("#EditPartner_country").selectOptionByValue("RU");
+            $("#EditPartner_custom_fields_1").setValue(String.valueOf(generate.funnyName()));
+            $("#EditPartner_status").selectOptionByValue("1");
+        });
+        step("Кликнуть по кнопке Add", () -> {
+            $("#EditPartner_submit").click();
+        });
+        step(" <--- Validation ---> " +
+                "1. Партнер успешно создан. " +
+                "2. Открыта станица редактирования партнера.", () -> {
+            $("#EditPartner_submit").shouldHave(text("Save"));
+        });
+        step("Screenshot", () -> {
+            screenshot("Create Affiliate");
+        });
     }
 
     @Test()
     public void createAffiliate5() {
-        open("/partners/new");
-        $("#EditPartner_email").setValue(generate.internet().emailAddress());
-        $("#EditPartner_password").setValue(generate.internet().password(6,12));
-        $("#EditPartner_manager_id").selectOption(3);
-        $("#EditPartner_country").selectOptionByValue("RU");
-        $("#EditPartner_custom_fields_1").setValue(String.valueOf(generate.funnyName()));
-        $("#EditPartner_status").selectOptionByValue("1");
-        $("#EditPartner_submit").click();
-        $("#EditPartner_submit").shouldHave(text("Save"));
-        screenshot("Create Affiliate");
+        step("Открыть страницу создания партнера", () -> {
+            open("/partners/new");
+        });
+        step("Заполнить поля корректными данными", () -> {
+            $("#EditPartner_email").setValue(generate.internet().emailAddress());
+            $("#EditPartner_password").setValue(generate.internet().password(6,12));
+            $("#EditPartner_manager_id").selectOption(3);
+            $("#EditPartner_country").selectOptionByValue("RU");
+            $("#EditPartner_custom_fields_1").setValue(String.valueOf(generate.funnyName()));
+            $("#EditPartner_status").selectOptionByValue("1");
+        });
+        step("Кликнуть по кнопке Add", () -> {
+            $("#EditPartner_submit").click();
+        });
+        step(" <--- Validation ---> " +
+                "1. Партнер успешно создан. " +
+                "2. Открыта станица редактирования партнера.", () -> {
+            $("#EditPartner_submit").shouldHave(text("Save"));
+        });
+        step("Screenshot", () -> {
+            screenshot("Create Affiliate");
+        });
     }
 
     @Test()
     public void createAffiliate6() {
-        open("/partners/new");
-        $("#EditPartner_email").setValue(generate.internet().emailAddress());
-        $("#EditPartner_password").setValue(generate.internet().password(6,12));
-        $("#EditPartner_manager_id").selectOption(3);
-        $("#EditPartner_country").selectOptionByValue("RU");
-        $("#EditPartner_custom_fields_1").setValue(String.valueOf(generate.funnyName()));
-        $("#EditPartner_status").selectOptionByValue("1");
-        $("#EditPartner_submit").click();
-        $("#EditPartner_submit").shouldHave(text("Save"));
-        screenshot("Create Affiliate");
+        step("Открыть страницу создания партнера", () -> {
+            open("/partners/new");
+        });
+        step("Заполнить поля корректными данными", () -> {
+            $("#EditPartner_email").setValue(generate.internet().emailAddress());
+            $("#EditPartner_password").setValue(generate.internet().password(6,12));
+            $("#EditPartner_manager_id").selectOption(3);
+            $("#EditPartner_country").selectOptionByValue("RU");
+            $("#EditPartner_custom_fields_1").setValue(String.valueOf(generate.funnyName()));
+            $("#EditPartner_status").selectOptionByValue("1");
+        });
+        step("Кликнуть по кнопке Add", () -> {
+            $("#EditPartner_submit").click();
+        });
+        step(" <--- Validation ---> " +
+                "1. Партнер успешно создан. " +
+                "2. Открыта станица редактирования партнера.", () -> {
+            $("#EditPartner_submit").shouldHave(text("Save"));
+        });
+        step("Screenshot", () -> {
+            screenshot("Create Affiliate");
+        });
     }
 
     @BeforeEach
     public void login(){
-        open("/user/login");
-        $("#email").setValue("root@user.admin");
-        $("#password").setValue("-&z%5CZc7=V^U7AN");
-        $(byXpath("//input[@id='sign']")).click();
-        $("button.btn.btn-success.btn-block").click();
+        step("Log in", () -> {
+            open("/user/login");
+            $("#email").setValue("root@user.admin");
+            $("#password").setValue("-&z%5CZc7=V^U7AN");
+            $(byXpath("//input[@id='sign']")).click();
+            $("button.btn.btn-success.btn-block").click();
+        });
     }
 
     @AfterEach
     public void close(){
-        WebDriverRunner.closeWebDriver();
+        step("Log out", () -> {
+            WebDriverRunner.closeWebDriver();
+        });
     }
 
 }

@@ -30,19 +30,22 @@ public class Affiliate {
     @Test
     public void createAffiliate1() {
         step("Открыть страницу создания партнера", () -> { open("/partners/new"); });
-        step("Заполнить поле email", () -> { $("#EditPartner_email").setValue(generate.internet().emailAddress()); });
-        step("Заполнить поле пароль", () -> { $("#EditPartner_password").setValue(generate.internet().password(6,12)); });
-        step("В поле менеджер для партнера выбрать любого пользователя", () -> { $("#EditPartner_manager_id").selectOption(3); });
-        step("В поле страна выбрать Россию", () -> { $("#EditPartner_country").selectOptionByValue("RU"); });
+        step("Заполнить поле Email", () -> { $("#EditPartner_email").setValue(generate.internet().emailAddress()); });
+        step("Заполнить поле Password", () -> { $("#EditPartner_password").setValue(generate.internet().password(6,12)); });
+        step("Заполнить поле Manager", () -> { $("#EditPartner_manager_id").selectOption(3); });
+        step("Заполнить поле Country", () -> { $("#EditPartner_country").selectOptionByValue("RU"); });
         step("Заполнить поле Skype", () -> { $("#EditPartner_custom_fields_1").setValue(String.valueOf(generate.funnyName())); });
-        step("В поле статус установить значение Active", () -> { $("#EditPartner_status").selectOptionByValue("1"); });
+        step("Заполнить поле Status", () -> { $("#EditPartner_status").selectOptionByValue("1"); });
         step("Нажать на кнопку Add", () -> { $("#EditPartner_submit").click(); });
-        step("Проверка | Текст на кнопке Add изменился и эквивалентен значению Save", () -> { $("#EditPartner_submit").shouldHave(text("Save")); });
-        step("Закрыть браузер", () -> { closeWebDriver(); });
+        step(" <--- Validation ---> " +
+                "1. Партнер успешно создан. " +
+                "2. Открыта станица редактирования партнера.", () -> { $("#EditPartner_submit").shouldHave(text("Save")); });
+        closeWebDriver();
     }
 
     @Test
     public void createAffiliate2() {
+//        SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
         step("Открыть страницу создания партнера", () -> {
             open("/partners/new");
         });

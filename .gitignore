@@ -37,3 +37,5 @@ out/
 *.ctxt
 api/src/logs
 cm
+allure-results
+.allure
