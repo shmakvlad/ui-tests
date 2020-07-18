@@ -13,6 +13,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <aspectj.version>1.9.5</aspectj.version>
         <allure.version>2.13.2</allure.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
@@ -123,10 +124,12 @@
 <!--                        </configurationParameters>-->
 <!--                    </properties>-->
 
-<!--                    <includes>-->
-<!--                        <include>**/*Affiliate.class</include>-->
-<!--                        <include>**\Affiliate.class</include>-->
-<!--                    </includes>-->
+                    <includes>
+                        <include>**/*Affiliate.class</include>
+                        <include>**/Selenoid.class</include>
+<!--                        <include>**/*.class</include>-->
+<!--                        <include>**/Run/**.class</include>-->
+                    </includes>
 
                     <parallel>all</parallel>
                     <threadCount>10</threadCount>
@@ -145,9 +148,9 @@
 <!--                            <value>true</value>-->
 <!--                        </property>-->
 <!--                    </systemProperties>-->
-<!--                    <systemPropertyVariables>-->
-<!--                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>-->
-<!--                    </systemPropertyVariables>-->
+                    <systemPropertyVariables>
+                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                    </systemPropertyVariables>
                 </configuration>
 
                 <dependencies>
