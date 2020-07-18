@@ -11,7 +11,7 @@ import java.net.URI;
 
 public class SelenoidWebDriverProvider implements WebDriverProvider {
 
-//    private String ip = "164.90.183.229";
+//    private String ip = "134.122.75.41";
     private String ip = "localhost";
 
     @Override
