@@ -39,3 +39,4 @@ api/src/logs
 cm
 allure-results
 .allure
+var/jenkins

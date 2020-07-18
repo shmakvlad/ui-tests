@@ -125,9 +125,9 @@
 <!--                    </properties>-->
 
                     <includes>
-                        <include>**/*Affiliate.class</include>
-<!--                        <include>**/Selenoid.class</include>-->
-                        <include>**/Manage.class</include>
+<!--                        <include>**/*Affiliate.class</include>-->
+                        <include>**/Selenoid.class</include>
+<!--                        <include>**/Manage.class</include>-->
 <!--                        <include>**/SeleniumSelenoid.class</include>-->
 <!--                        <include>**/*.class</include>-->
                     </includes>
