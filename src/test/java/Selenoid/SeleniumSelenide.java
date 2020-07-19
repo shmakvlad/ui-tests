@@ -25,7 +25,7 @@ public class SeleniumSelenide { // Selenium + Selenide
     public void initDriver() throws IOException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setBrowserName("opera");
-        capabilities.setVersion("67.0");
+        capabilities.setVersion("68.0");
         capabilities.setCapability("enableVNC", true);
         capabilities.setCapability("enableVideo", false);
         WebDriver driver = new RemoteWebDriver(

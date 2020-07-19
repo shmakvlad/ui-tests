@@ -22,7 +22,7 @@ public class SeleniumSelenoid { // Clean Selenium
     public void setUpConfiguration() throws MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setBrowserName("firefox");
-        capabilities.setVersion("75.0");
+        capabilities.setVersion("76.0");
         capabilities.setCapability("enableVNC", true);
         capabilities.setCapability("enableVideo", false);
         driver = new RemoteWebDriver(
