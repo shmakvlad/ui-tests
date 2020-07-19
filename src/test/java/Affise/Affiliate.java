@@ -8,7 +8,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
-import static com.codeborne.selenide.Browsers.CHROME;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
@@ -23,23 +22,41 @@ public class Affiliate {
 
     @BeforeAll
     public static void setUp() {
-        Configuration.browser = CHROME;
+        Configuration.browser = "Selenoid.Provider.SelenoidWebDriverProvider";
         Configuration.baseUrl = "http://offers.staging.affise.com";
     }
 
     @Test
     public void createAffiliate1() {
-        step("Открыть страницу создания партнера", () -> { open("/partners/new"); });
-        step("Заполнить поле Email", () -> { $("#EditPartner_email").setValue(generate.internet().emailAddress()); });
-        step("Заполнить поле Password", () -> { $("#EditPartner_password").setValue(generate.internet().password(6,12)); });
-        step("Заполнить поле Manager", () -> { $("#EditPartner_manager_id").selectOption(3); });
-        step("Заполнить поле Country", () -> { $("#EditPartner_country").selectOptionByValue("RU"); });
-        step("Заполнить поле Skype", () -> { $("#EditPartner_custom_fields_1").setValue(String.valueOf(generate.funnyName())); });
-        step("Заполнить поле Status", () -> { $("#EditPartner_status").selectOptionByValue("1"); });
-        step("Нажать на кнопку Add", () -> { $("#EditPartner_submit").click(); });
+        step("Открыть страницу создания партнера", () -> {
+            open("/partners/new");
+        });
+        step("Заполнить поле Email", () -> {
+            $("#EditPartner_email").setValue(generate.internet().emailAddress());
+        });
+        step("Заполнить поле Password", () -> {
+            $("#EditPartner_password").setValue(generate.internet().password(6,12));
+        });
+        step("Заполнить поле Manager", () -> {
+            $("#EditPartner_manager_id").selectOption(3);
+        });
+        step("Заполнить поле Country", () -> {
+            $("#EditPartner_country").selectOptionByValue("RU");
+        });
+        step("Заполнить поле Skype", () -> {
+            $("#EditPartner_custom_fields_1").setValue(String.valueOf(generate.funnyName()));
+        });
+        step("Заполнить поле Status", () -> {
+            $("#EditPartner_status").selectOptionByValue("1");
+        });
+        step("Нажать на кнопку Add", () -> {
+            $("#EditPartner_submit").click();
+        });
         step(" <--- Validation ---> " +
                 "1. Партнер успешно создан. " +
-                "2. Открыта станица редактирования партнера.", () -> { $("#EditPartner_submit").shouldHave(text("Save")); });
+                "2. Открыта станица редактирования партнера.", () -> {
+            $("#EditPartner_submit").shouldHave(text("Save"));
+        });
         closeWebDriver();
     }
 

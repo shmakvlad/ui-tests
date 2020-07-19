@@ -21,12 +21,12 @@ public class SeleniumSelenoid { // Clean Selenium
     @BeforeEach
     public void setUpConfiguration() throws MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setBrowserName("chrome");
-        capabilities.setVersion("83.0");
+        capabilities.setBrowserName("firefox");
+        capabilities.setVersion("75.0");
         capabilities.setCapability("enableVNC", true);
         capabilities.setCapability("enableVideo", false);
         driver = new RemoteWebDriver(
-                URI.create("http://localhost:4444/wd/hub").toURL(),
+                URI.create("http://10.201.0.80:4444/wd/hub").toURL(),
                 capabilities
         );
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -56,7 +56,7 @@ public class SeleniumSelenoid { // Clean Selenium
         driver.get("http://offers.staging.affise.com");
         driver.findElement(byId("email")).sendKeys("ivan@gmail.com");
         driver.findElement(byId("password")).sendKeys("vlad12-8");
-        driver.findElement(byXpath("//input[@id='sign']")).click();
+        driver.findElement(byXpath("//input[@id='signin']")).click();
         driver.findElement(byClassName("btn-success")).click();
     }
 

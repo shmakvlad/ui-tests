@@ -25,11 +25,11 @@ public class SeleniumSelenide { // Selenium + Selenide
     public void initDriver() throws IOException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setBrowserName("opera");
-        capabilities.setVersion("68.0");
+        capabilities.setVersion("67.0");
         capabilities.setCapability("enableVNC", true);
         capabilities.setCapability("enableVideo", false);
         WebDriver driver = new RemoteWebDriver(
-                new URL("http://localhost:4444/wd/hub"),
+                new URL("http://10.201.0.80:4444/wd/hub"),
                 capabilities
         );
         driver.manage().window().setSize(new Dimension(1920,1024));
@@ -61,7 +61,7 @@ public class SeleniumSelenide { // Selenium + Selenide
         open("/user/login");
         $("#email").setValue("ivan@gmail.com");
         $("#password").setValue("vlad12-8");
-        $(byXpath("//input[@id='sign']")).click();
+        $(byXpath("//input[@id='signin']")).click();
         $("button.btn.btn-success.btn-block").click();
     }
 
