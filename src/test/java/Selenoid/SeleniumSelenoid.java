@@ -56,7 +56,7 @@ public class SeleniumSelenoid { // Clean Selenium
         driver.get("http://offers.staging.affise.com");
         driver.findElement(byId("email")).sendKeys("ivan@gmail.com");
         driver.findElement(byId("password")).sendKeys("vlad12-8");
-        driver.findElement(byXpath("//input[@id='signin']")).click();
+        driver.findElement(byXpath("//input[@id='sign']")).click();
         driver.findElement(byClassName("btn-success")).click();
     }
 

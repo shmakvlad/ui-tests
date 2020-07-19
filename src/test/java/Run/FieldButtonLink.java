@@ -10,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
@@ -43,7 +44,7 @@ public class FieldButtonLink {
         button.exists(); button.isDisplayed(); button.isEnabled(); // true
 
         System.out.println(button);     // <button class="btn btn-success btn-block" type="submit" value>Sign in</button>
-        button.shouldBe(Condition.exist);
+        button.shouldBe(exist);
         button.shouldBe(Condition.visible);
         button.shouldBe(Condition.enabled);
         button.shouldBe(Condition.appear);

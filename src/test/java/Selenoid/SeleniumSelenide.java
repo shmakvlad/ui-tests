@@ -61,7 +61,7 @@ public class SeleniumSelenide { // Selenium + Selenide
         open("/user/login");
         $("#email").setValue("ivan@gmail.com");
         $("#password").setValue("vlad12-8");
-        $(byXpath("//input[@id='signin']")).click();
+        $(byXpath("//input[@id='sign']")).click();
         $("button.btn.btn-success.btn-block").click();
     }
 
