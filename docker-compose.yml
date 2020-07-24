@@ -28,8 +28,18 @@ services:
 
   jenkins:
     image: jenkins/jenkins:lts
+    container_name: jenkins
     volumes:
       - ./var/jenkins:/var/jenkins_home
     ports:
       - 8000:8080
+    network_mode: bridge
+
+  jira:
+    image: atlassian/jira-software
+    container_name: jira
+    volumes:
+      - "${PWD}/var/jira:/var/atlassian/application-data/jira"
+    ports:
+      - "9082:8080"
     network_mode: bridge

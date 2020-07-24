@@ -4,10 +4,8 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.junit5.ScreenShooterExtension;
 import com.github.javafaker.Faker;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import io.qameta.allure.Issue;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
 import static com.codeborne.selenide.Condition.*;
@@ -30,6 +28,8 @@ public class Affiliate {
     }
 
     @Test
+    @Issue("AF-24")
+    @DisplayName("User can create partner")
     public void createAffiliate1() {
         step("Открыть страницу создания партнера", () -> {
             open("/partners/new");
