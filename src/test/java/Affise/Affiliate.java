@@ -63,6 +63,7 @@ public class Affiliate {
     }
 
     @Test
+    @DisplayName("User can create partner")
     public void createAffiliate2() {
 //        SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
         step("Открыть страницу создания партнера", () -> {

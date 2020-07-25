@@ -59,7 +59,7 @@ public class Advertiser {
                 "1. Advertiser successfully created. " +
                 "2. Advertiser edit page is open.", () -> {
             SelenideElement text = $(byXpath("//div[contains(@class,'panel-heading')][1]"));
-            assertEquals("Edit advertiser.", text.getText());
+            assertEquals("Edit advertiser", text.getText());
         });
     }
 
