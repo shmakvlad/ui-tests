@@ -20,7 +20,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.openqa.selenium.remote.BrowserType.CHROME;
 
-public class switchTabWindow {
+public class SwitchTabWindow {
 
     private final Faker generate = new Faker();
 
@@ -150,6 +150,25 @@ public class switchTabWindow {
         driver.close();
         driver.switchTo().window(mainPage);
         driver.findElement(By.xpath("//span[contains(text(),'Create')]"));
+        driver.quit();
+    }
+
+    @Test
+    public void switchTabsWindows(){
+    // Selenium
+        WebDriver driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
+
+    // Switch
+        driver.get(Configuration.baseUrl);
+        String page = driver.getWindowHandle();
+        driver.findElement(By.linkText("Password recovering")).sendKeys(Keys.COMMAND, Keys.ENTER);
+        for (String tab : driver.getWindowHandles()){
+            driver.switchTo().window(tab);
+        }
+        driver.findElement(By.xpath("//button[text()='Restore']")).click();
+        driver.switchTo().window(page);
         driver.quit();
     }
 
