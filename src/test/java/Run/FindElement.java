@@ -1,14 +1,21 @@
 package Run;
 
+import com.codeborne.selenide.ElementsCollection;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
+import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class FindElement {
 
@@ -74,6 +81,37 @@ public class FindElement {
         } finally {
             driver.quit();
         }
+    }
+
+    @Test
+    public void table() {
+    // Login
+        open("http://offers.staging.affise.com");
+        $("#email").setValue("ivan@gmail.com");
+        $("#password").setValue("vlad12-8");
+        $(byXpath("//input[@id='sign']")).click();
+        $("button.btn.btn-success.btn-block").click();
+
+    // Request data
+        open("http://offers.staging.affise.com/stats/custom");
+        $("input.form-control.date-range").click();
+        $$("div.ranges li").findBy(text("This Month")).click();
+
+        ElementsCollection data = $$("div ul li label");
+        data.findBy(text("Day")).click();
+        data.findBy(text("Affiliate")).click();
+        data.findBy(text("Offer")).click();
+        data.find(text("Clicks")).click();
+        data.findBy(text("Total conversions")).click();
+
+        $(byValue("View")).click();
+        $(".table.table-stats").shouldBe(exist);
+
+    // Table class
+        WebElement element = getWebDriver().findElement(By.xpath("//div/table"));
+        WebDriver webDriver = getWebDriver();
+        Table table = new Table(element, webDriver);
+        assertThat(table.getValue(3,2), equalTo("8"));
     }
 
 }

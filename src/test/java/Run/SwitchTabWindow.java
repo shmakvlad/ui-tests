@@ -178,6 +178,7 @@ public class SwitchTabWindow {
         $("#email").setValue("ivan@gmail.com");
         $("#password").setValue("vlad12-8");
         $(byXpath("//input[@id='sign']")).click();
+//        $(By.xpath("//a[text()='Password recovering']")).sendKeys(Keys.SHIFT, Keys.ENTER);
         $("button.btn.btn-success.btn-block").click();
     }
 

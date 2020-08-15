@@ -12,7 +12,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import java.util.concurrent.TimeUnit;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selectors.byValue;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
 
 public class CheckboxRadioButtons {
@@ -133,6 +134,7 @@ public class CheckboxRadioButtons {
         open("http://offers.staging.affise.com");
         $("#email").setValue("ivan@gmail.com");
         $("#password").setValue("vlad12-8");
+        $(byXpath("//input[@id='sign']")).click();
         $("button.btn.btn-success.btn-block").click();
     }
 
