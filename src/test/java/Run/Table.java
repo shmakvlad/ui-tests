@@ -76,7 +76,7 @@ public class Table {
         assertThat(getTextValueSelenide(2, "Clicks"), equalTo("752"));
     }
 
-    public ElementsCollection getRowsSelenide(){
+    public static ElementsCollection getRowsSelenide(){
         return $$(".table.table-stats tbody tr");
     }
 

@@ -12,8 +12,8 @@ import java.util.concurrent.TimeUnit;
 
 import static com.codeborne.selenide.Selectors.*;
 
-//@Execution(ExecutionMode.CONCURRENT)  // Run in multiple thread
-//@Execution(ExecutionMode.SAME_THREAD) // Run in one thread
+//@Execution(ExecutionMode.CONCURRENT)  // AuthorizationPage in multiple thread
+//@Execution(ExecutionMode.SAME_THREAD) // AuthorizationPage in one thread
 public class SeleniumSelenoid { // Clean Selenium
 
     private RemoteWebDriver driver;

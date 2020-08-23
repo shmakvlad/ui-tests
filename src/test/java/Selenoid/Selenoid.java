@@ -22,8 +22,8 @@ import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 
-//@Execution(ExecutionMode.SAME_THREAD)   // Run in one thread
-//@Execution(ExecutionMode.CONCURRENT)    // Run in multiple thread
+//@Execution(ExecutionMode.SAME_THREAD)   // AuthorizationPage in one thread
+//@Execution(ExecutionMode.CONCURRENT)    // AuthorizationPage in multiple thread
 public class Selenoid {
 
     private RemoteWebDriver driver;
