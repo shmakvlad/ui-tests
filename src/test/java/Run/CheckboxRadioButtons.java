@@ -127,6 +127,8 @@ public class CheckboxRadioButtons {
         selenideElement.shouldBe(exist);
         selenideElement.shouldBe(visible);
         selenideElement.shouldBe(enabled);
+//        selenideElement.shouldBe(selected);
+//        selenideElement.shouldBe(checked);
     }
 
     @BeforeEach

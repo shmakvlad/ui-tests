@@ -29,7 +29,7 @@ public class AuthorizationPage {
 
     public static MainPage logIn(String email, String password){
         open();
-        authorizeUser(email,password);
+        authorizeUser(email, password);
         return new MainPage();
     }
 

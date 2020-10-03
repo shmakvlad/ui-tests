@@ -21,6 +21,11 @@ public class TestCasesSelenium {
 
     private WebDriver driver;
 
+//    Another option is to initialize page classes before tests and then work with class variables.
+//    private MainPage mainPage;
+//    private AuthorizationPage authorizationPage;
+//    private PasswordRecoveryPage passwordRecoveryPage;
+
     @BeforeAll
     public void setDriver() {
         driver = new ChromeDriver();
@@ -55,7 +60,7 @@ public class TestCasesSelenium {
     @Test
     public void loginPageFactory() throws InterruptedException {
         LoginPageFactory loginPageFactory = PageFactory.initElements(driver, LoginPageFactory.class);
-        loginPageFactory.open();
+        loginPageFactory.open().open();
         loginPageFactory.authorizeUser("ivan@gmail.com","vlad12-8");
     }
 
